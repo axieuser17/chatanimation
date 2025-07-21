@@ -10,22 +10,23 @@ class ChatController {
         this.currentStep = 0;
         this.isAnimating = false;
         
+        // Fast-paced conversation flow
         this.conversation = [
-            { type: 'bot', text: 'Hej! Välkommen till Axie Studio! 👋', delay: 1500 },
-            { type: 'bot', text: 'Jag kan hjälpa dig att boka en tid för konsultation eller demo.', delay: 2500 },
-            { type: 'user', text: 'Hej! Jag skulle vilja boka en tid för en demo.', delay: 3000, simulateTyping: true },
-            { type: 'bot', text: 'Perfekt! En demo är ett utmärkt sätt att se vad vi kan erbjuda.', delay: 2000 },
-            { type: 'bot', text: 'Vilken typ av tjänst är du mest intresserad av?', delay: 2500 },
-            { type: 'user', text: 'Jag är intresserad av webbutveckling och design.', delay: 3500, simulateTyping: true },
-            { type: 'bot', text: 'Fantastiskt! Vi har stor expertis inom webbutveckling och modern design.', delay: 2000 },
-            { type: 'bot', text: 'Låt mig öppna vårt bokningssystem så du kan välja en tid som passar dig! ✨', delay: 3000 }
+            { type: 'bot', text: 'Hej! Välkommen till Axie Studio! 👋', delay: 800 },
+            { type: 'bot', text: 'Jag kan hjälpa dig att boka en tid för konsultation eller demo.', delay: 1200 },
+            { type: 'user', text: 'Hej! Jag skulle vilja boka en tid för en demo.', delay: 1500, simulateTyping: true },
+            { type: 'bot', text: 'Perfekt! En demo är ett utmärkt sätt att se vad vi kan erbjuda.', delay: 1000 },
+            { type: 'bot', text: 'Vilken typ av tjänst är du mest intresserad av?', delay: 1200 },
+            { type: 'user', text: 'Jag är intresserad av webbutveckling och design.', delay: 1800, simulateTyping: true },
+            { type: 'bot', text: 'Fantastiskt! Vi har stor expertis inom webbutveckling och modern design.', delay: 1000 },
+            { type: 'bot', text: 'Låt mig öppna vårt bokningssystem så du kan välja en tid! ✨', delay: 1500 }
         ];
         
         this.initializeEventListeners();
     }
     
     initializeEventListeners() {
-        // Remove manual interaction - everything is automatic
+        // Make input readonly initially
         this.messageInput.setAttribute('readonly', true);
         this.sendButton.style.pointerEvents = 'none';
     }
@@ -37,8 +38,8 @@ class ChatController {
             this.chatContainer.classList.add('active');
             setTimeout(() => {
                 this.startConversation();
-            }, 800);
-        }, 500);
+            }, 600);
+        }, 400);
     }
     
     startConversation() {
@@ -70,26 +71,32 @@ class ChatController {
     }
     
     simulateTyping(text, callback) {
+        // Enable input for typing simulation
         this.messageInput.removeAttribute('readonly');
         this.messageInput.focus();
+        this.messageInput.classList.add('user-typing');
         
         let i = 0;
         const typeChar = () => {
             if (i < text.length) {
                 this.messageInput.value += text.charAt(i);
                 i++;
-                setTimeout(typeChar, 80 + Math.random() * 40); // Realistic typing speed
+                // Fast typing speed
+                setTimeout(typeChar, 40 + Math.random() * 20);
             } else {
+                // Simulate send button click
                 setTimeout(() => {
-                    // Simulate send button click
                     this.sendButton.classList.add('sending');
+                    this.messageInput.classList.add('sending');
+                    
                     setTimeout(() => {
                         this.messageInput.value = '';
                         this.messageInput.setAttribute('readonly', true);
+                        this.messageInput.classList.remove('user-typing', 'sending');
                         this.sendButton.classList.remove('sending');
                         callback();
-                    }, 300);
-                }, 500);
+                    }, 200);
+                }, 300);
             }
         };
         typeChar();
@@ -98,6 +105,7 @@ class ChatController {
     showBotMessage(text) {
         this.showTypingIndicator();
         
+        // Fast bot response time
         setTimeout(() => {
             this.hideTypingIndicator();
             this.addMessage(text, true);
@@ -106,11 +114,11 @@ class ChatController {
             if (this.currentStep === this.conversation.length) {
                 setTimeout(() => {
                     window.bookingController.openBookingSystem();
-                }, 2500);
+                }, 1500);
             } else {
                 this.startConversation();
             }
-        }, 1500 + Math.random() * 1000); // Realistic bot response time
+        }, 800 + Math.random() * 400);
     }
     
     addMessage(text, isBot = true) {
@@ -130,17 +138,18 @@ class ChatController {
         
         this.chatMessages.appendChild(messageDiv);
         
-        // Typewriter effect
+        // Fast typewriter effect
         let i = 0;
         const typeWriter = () => {
             if (i < text.length) {
                 textContainer.textContent += text.charAt(i);
                 i++;
-                setTimeout(typeWriter, isBot ? 25 : 15);
+                // Fast typewriter speed
+                setTimeout(typeWriter, isBot ? 15 : 10);
             }
         };
         
-        setTimeout(typeWriter, 200);
+        setTimeout(typeWriter, 100);
         this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
     }
     

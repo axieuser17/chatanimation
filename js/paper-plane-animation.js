@@ -34,7 +34,6 @@ class PaperPlaneAnimation {
         
         this.createAnimationContainer();
         
-        // Show container
         setTimeout(() => {
             this.container.classList.add('active');
             this.startFlightAnimation();
@@ -61,18 +60,18 @@ class PaperPlaneAnimation {
             // Show success message mid-flight
             setTimeout(() => {
                 successMessage.classList.add('visible');
-            }, 2000);
+            }, 1200);
             
-            // Complete animation
+            // Complete animation faster
             setTimeout(() => {
                 this.completeAnimation();
-            }, 4000);
+            }, 2500);
             
-        }, 500);
+        }, 300);
     }
     
     createParticleTrail() {
-        const particleCount = 20;
+        const particleCount = 15;
         
         for (let i = 0; i < particleCount; i++) {
             setTimeout(() => {
@@ -80,14 +79,14 @@ class PaperPlaneAnimation {
                 particle.className = 'trail-particle';
                 particle.style.left = Math.random() * 100 + '%';
                 particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 2 + 's';
+                particle.style.animationDelay = Math.random() * 1 + 's';
                 
                 this.container.appendChild(particle);
                 
                 setTimeout(() => {
                     particle.remove();
-                }, 3000);
-            }, i * 100);
+                }, 2000);
+            }, i * 60);
         }
     }
     
@@ -100,8 +99,8 @@ class PaperPlaneAnimation {
             setTimeout(() => {
                 window.endingAnimation.showEndingMessage();
                 this.cleanup();
-            }, 1000);
-        }, 1500);
+            }, 600);
+        }, 800);
     }
     
     cleanup() {

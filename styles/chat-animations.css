@@ -305,10 +305,21 @@
     background: white;
 }
 
-.chat-input textarea.typing {
+.chat-input textarea.user-typing {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 4px var(--primary-light);
     background: white;
+    animation: userTyping 0.1s infinite;
+}
+
+.chat-input textarea.sending {
+    transform: scale(0.98);
+    opacity: 0.8;
+}
+
+@keyframes userTyping {
+    0%, 100% { transform: translateY(-2px); }
+    50% { transform: translateY(-1px); }
 }
 
 .send-button {
@@ -332,6 +343,7 @@
 .send-button.sending {
     transform: scale(0.95);
     box-shadow: 0 2px 8px rgba(0, 102, 204, 0.5);
+    background: linear-gradient(135deg, #0052a3, #003d7a);
 }
 
 .send-button::before {

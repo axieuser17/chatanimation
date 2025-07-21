@@ -13,7 +13,7 @@ class EndingAnimation {
         setTimeout(() => {
             this.container.classList.add('active');
             this.startTextAnimation();
-        }, 500);
+        }, 300);
     }
     
     createEndingContainer() {
@@ -79,29 +79,29 @@ class EndingAnimation {
         const stats = this.container.querySelectorAll('.stat-number');
         const ctaButton = this.container.querySelector('.cta-button');
         
-        // Animate words one by one
+        // Fast word animation
         words.forEach((word, index) => {
             setTimeout(() => {
                 word.classList.add('visible');
-            }, index * 300 + 1000);
+            }, index * 200 + 600);
         });
         
-        // Show subtitle and CTA
+        // Show subtitle and CTA faster
         setTimeout(() => {
             this.container.querySelector('.subtitle').classList.add('visible');
             
             setTimeout(() => {
                 this.container.querySelector('.cta-button-container').classList.add('visible');
                 this.startButtonAnimation();
-            }, 800);
+            }, 500);
             
-        }, words.length * 300 + 1500);
+        }, words.length * 200 + 1000);
         
         // Animate stats
         setTimeout(() => {
             this.container.querySelector('.success-stats').classList.add('visible');
             this.animateStats();
-        }, words.length * 300 + 2500);
+        }, words.length * 200 + 1500);
         
         // Start floating elements
         this.startFloatingAnimation();
@@ -123,15 +123,15 @@ class EndingAnimation {
             
             setTimeout(() => {
                 particle.remove();
-            }, 2000);
-        }, 200);
+            }, 1500);
+        }, 150);
         
         // Pulse animation
         setInterval(() => {
             if (!this.isShowing) return;
             button.classList.add('pulse');
-            setTimeout(() => button.classList.remove('pulse'), 600);
-        }, 3000);
+            setTimeout(() => button.classList.remove('pulse'), 400);
+        }, 2000);
     }
     
     animateStats() {
@@ -140,7 +140,7 @@ class EndingAnimation {
         stats.forEach(stat => {
             const target = parseInt(stat.dataset.target);
             let current = 0;
-            const increment = target / 50;
+            const increment = target / 30; // Faster counting
             
             const timer = setInterval(() => {
                 current += increment;
@@ -149,7 +149,7 @@ class EndingAnimation {
                     clearInterval(timer);
                 }
                 stat.textContent = Math.floor(current);
-            }, 50);
+            }, 40);
         });
     }
     
@@ -159,7 +159,7 @@ class EndingAnimation {
         elements.forEach((element, index) => {
             setTimeout(() => {
                 element.classList.add('floating');
-            }, index * 200);
+            }, index * 100);
         });
     }
     
@@ -174,6 +174,6 @@ class EndingAnimation {
                 this.container = null;
             }
             this.isShowing = false;
-        }, 1000);
+        }, 800);
     }
 }

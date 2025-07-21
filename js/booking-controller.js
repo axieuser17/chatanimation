@@ -6,14 +6,15 @@ class BookingController {
         this.currentStep = 0;
         this.isAnimating = false;
         
+        // Fast booking flow
         this.bookingFlow = [
-            { step: 1, delay: 1000 },
-            { step: 'selectDate', delay: 2500, value: '2024-01-17' },
-            { step: 2, delay: 1500 },
-            { step: 'selectTime', delay: 2000, value: '13:00' },
-            { step: 3, delay: 1500 },
-            { step: 'fillForm', delay: 2000 },
-            { step: 'confirm', delay: 3000 }
+            { step: 1, delay: 600 },
+            { step: 'selectDate', delay: 1200, value: '2024-01-17' },
+            { step: 2, delay: 800 },
+            { step: 'selectTime', delay: 1000, value: '13:00' },
+            { step: 3, delay: 800 },
+            { step: 'fillForm', delay: 1200 },
+            { step: 'confirm', delay: 2000 }
         ];
     }
     
@@ -24,8 +25,8 @@ class BookingController {
             this.bookingSystem.classList.add('active');
             setTimeout(() => {
                 this.startAutomaticBooking();
-            }, 800);
-        }, 800);
+            }, 500);
+        }, 600);
     }
     
     startAutomaticBooking() {
@@ -81,13 +82,12 @@ class BookingController {
         );
         
         if (targetOption) {
-            // Add hover effect first
             targetOption.classList.add('hover-effect');
             
             setTimeout(() => {
                 targetOption.classList.remove('hover-effect');
                 this.selectDate(targetOption, date);
-            }, 800);
+            }, 500);
         }
     }
     
@@ -103,15 +103,15 @@ class BookingController {
             setTimeout(() => {
                 targetOption.classList.remove('hover-effect');
                 this.selectTime(targetOption, time);
-            }, 800);
+            }, 500);
         }
     }
     
     autoFillForm() {
         const formData = [
             { id: 'name', value: 'Anna Andersson', delay: 0 },
-            { id: 'email', value: 'anna.andersson@email.com', delay: 1200 },
-            { id: 'phone', value: '070-123 45 67', delay: 2400 }
+            { id: 'email', value: 'anna.andersson@email.com', delay: 800 },
+            { id: 'phone', value: '070-123 45 67', delay: 1600 }
         ];
         
         formData.forEach(field => {
@@ -133,14 +133,15 @@ class BookingController {
             if (i < value.length) {
                 field.value += value.charAt(i);
                 i++;
-                setTimeout(typeChar, 60 + Math.random() * 40);
+                // Fast typing
+                setTimeout(typeChar, 30 + Math.random() * 20);
             } else {
                 field.classList.remove('typing');
                 field.blur();
             }
         };
         
-        setTimeout(typeChar, 200);
+        setTimeout(typeChar, 100);
     }
     
     autoConfirmBooking() {
@@ -154,13 +155,12 @@ class BookingController {
                 
                 setTimeout(() => {
                     this.completeBooking();
-                }, 1000);
-            }, 800);
+                }, 600);
+            }, 500);
         }
     }
     
     completeBooking() {
-        // Add success animation
         this.bookingSystem.classList.add('booking-success');
         
         setTimeout(() => {
@@ -168,8 +168,8 @@ class BookingController {
             
             setTimeout(() => {
                 window.paperPlaneAnimation.startAnimation();
-            }, 1000);
-        }, 2000);
+            }, 600);
+        }, 1000);
     }
     
     selectDate(element, date) {
