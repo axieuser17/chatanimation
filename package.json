@@ -1,14 +1,16 @@
 {
-  "name": "axie-studio-chat",
+  "name": "chatbotanimation",
   "version": "1.0.0",
-  "description": "A modern, animated chatbot interface for Axie Studio's booking system",
-  "main": "index.html",
+  "description": "Axie Studio Chat Animation",
+  "main": "index.js",
   "scripts": {
-    "dev": "http-server . -p 3000 -o",
-    "start": "http-server . -p 3000",
-    "preview": "http-server . -p 3000"
+    "dev": "npx http-server . -p 3000 -o",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["chatbot", "animation", "booking", "axie-studio"],
-  "author": "Axie Studio",
-  "license": "MIT"
+  "keywords": ["chatbot", "animation", "axie-studio"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
 }
