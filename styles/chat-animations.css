@@ -191,6 +191,26 @@
     position: relative;
     backdrop-filter: blur(5px);
     line-height: 1.6;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.message-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.message-text {
+    flex: 1;
 }
 
 .bot-message {
@@ -208,6 +228,11 @@
     margin-left: auto;
     border-bottom-right-radius: 6px;
     box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+    flex-direction: row-reverse;
+}
+
+.user-message .message-avatar {
+    background: rgba(255,255,255,0.2);
 }
 
 .typing-indicator {
@@ -280,6 +305,12 @@
     background: white;
 }
 
+.chat-input textarea.typing {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px var(--primary-light);
+    background: white;
+}
+
 .send-button {
     padding: 16px 28px;
     background: linear-gradient(135deg, var(--primary-color), #0052a3);
@@ -298,6 +329,11 @@
     box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
 }
 
+.send-button.sending {
+    transform: scale(0.95);
+    box-shadow: 0 2px 8px rgba(0, 102, 204, 0.5);
+}
+
 .send-button::before {
     content: '';
     position: absolute;
@@ -311,19 +347,9 @@
     transition: all 0.4s;
 }
 
-.send-button:hover {
-    background: linear-gradient(135deg, #0052a3, #003d7a);
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(0, 102, 204, 0.5);
-}
-
 .send-button:hover::before {
     width: 120px;
     height: 120px;
-}
-
-.send-button:active {
-    transform: translateY(-1px) scale(1.02);
 }
 
 .send-button svg {
